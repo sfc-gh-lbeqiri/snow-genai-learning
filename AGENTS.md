@@ -2,17 +2,13 @@
 
 ## Purpose
 
-This repo is a **practical learning resource for a Snowflake Solutions Architect**. Every example must:
-1. Be self-contained and runnable end-to-end with minimal setup
-2. Include data — either generated inline or loaded from a publicly available open-source dataset
-3. Teach a specific Snowflake GenAI capability through hands-on code and clear explanations
-4. Cover all three data modalities: structured, semi-structured, and unstructured
+Practical learning resource for Snowflake Solutions Architects. Every lab is a **self-contained SQL Snowflake Notebook** (`.ipynb` with `language_info: sql`) that includes setup, sample data, and demos in a single file.
 
 ---
 
 ## Audience
 
-**Snowflake Solutions Architect** — technically proficient but learning these specific GenAI features for the first time. Examples should explain *why* each feature is used, not just *how*.
+**Snowflake Solutions Architect** — technically proficient but learning GenAI features for the first time. Examples explain *why* each feature is used, not just *how*.
 
 ---
 
@@ -22,125 +18,96 @@ This repo is a **practical learning resource for a Snowflake Solutions Architect
 snow-genai-learning/
 ├── AGENTS.md
 ├── README.md
-├── requirements.md
 ├── structured/
 │   └── <use-case-name>/
-│       ├── setup.sql         # DDL + data generation/load (must run first)
-│       └── notebook.ipynb    # End-to-end walkthrough with narrative
+│       └── notebook.ipynb    # Self-contained SQL notebook (setup + demo)
 ├── semi-structured/
 │   └── <use-case-name>/
-│       ├── setup.sql
 │       └── notebook.ipynb
 └── unstructured/
     └── <use-case-name>/
-        ├── setup.sql
         └── notebook.ipynb
 ```
 
-Name use-case directories in lowercase with hyphens, e.g. `cortex-analyst-sales`, `document-qa-rag`.
+Each notebook contains:
+- Markdown cells with explanations and architecture diagrams
+- SQL cells that create the database, tables, insert data, and run demos
+- No external setup scripts, no Python dependencies
 
 ---
 
-## Data Strategy (priority order)
+## Data Strategy
 
-1. **`SNOWFLAKE_SAMPLE_DATA`** — use first; zero ingestion overhead (TPC-H, TPC-DS, Weather)
-2. **Publicly available open-source datasets** — Hugging Face, NYC Open Data, Wikipedia dumps, UCI ML Repository
-3. **Synthetic data generated inline** — use `SELECT ... FROM TABLE(GENERATOR(...))` in SQL or Python `faker` if no public dataset fits
-
-Always document the dataset source and how to obtain it in `README.md`.
+1. **`SNOWFLAKE_SAMPLE_DATA`** — zero ingestion overhead (TPC-H)
+2. **Synthetic data generated inline** — `INSERT INTO ... VALUES` or `GENERATOR()` in SQL
+3. Every dataset is created inside the notebook — no external downloads required
 
 ---
 
-## GenAI Capabilities to Cover
+## GenAI Capabilities Covered (13 labs)
 
-| Feature | Data Modality | Suggested Dataset |
+| Feature | Data Modality | Dataset |
 |---|---|---|
-| `SNOWFLAKE.CORTEX.COMPLETE` | Any | Any text column |
-| `AI_CLASSIFY` | Structured / Semi | TPC-H orders, product catalog JSON |
-| `AI_SENTIMENT` | Structured | Amazon reviews (Hugging Face) |
-| `AI_EXTRACT` | Semi / Unstructured | JSON logs, PDF contracts |
-| `AI_SUMMARIZE` | Unstructured | Wikipedia articles, support tickets |
-| `AI_TRANSLATE` | Any | Multilingual product descriptions |
-| `AI_EMBED` + vector search | Any | Any text corpus |
-| `AI_FILTER` | Any | Customer feedback table |
-| `AI_AGG` | Structured | TPC-H / TPC-DS |
-| `AI_PARSE_DOCUMENT` | Unstructured | PDF invoices, images |
-| `AI_REDACT` | Any | Synthetic PII dataset |
-| Cortex Analyst | Structured | TPC-H ORDERS + LINEITEM |
-| Cortex Search | Unstructured / Semi | Wikipedia / product manuals |
-| Cortex Agent | Any | Multi-tool orchestration demo |
+| `AI_CLASSIFY` | Structured | TPC-H ORDERS |
+| `AI_SENTIMENT` | Structured | 30 synthetic reviews |
+| `AI_AGG` | Structured | TPC-H LINEITEM |
+| Cortex Analyst | Structured | TPC-H views + semantic model |
+| `AI_EXTRACT` | Semi-Structured | 200 JSON logs |
+| `AI_FILTER` | Semi-Structured | 20 VARIANT feedback records |
+| `AI_TRANSLATE` | Semi-Structured | 16 multilingual descriptions |
+| `CORTEX.COMPLETE` | Semi-Structured | Prompt patterns |
+| `AI_SUMMARIZE` | Unstructured | 5 Wikipedia-style articles |
+| `AI_PARSE_DOCUMENT` | Unstructured | PDF invoices on stage |
+| `AI_REDACT` | Unstructured | 10 synthetic PII records |
+| Cortex Search + RAG | Unstructured | Article embeddings |
+| Cortex Agent | Unstructured | Multi-tool orchestration |
 
 ---
 
-## Per-Example Requirements
+## Notebook Format
 
-Each example directory must satisfy:
-- [ ] `setup.sql` runs cleanly from scratch — creates DB/schema/stage/table, loads or generates data
-- [ ] `notebook.ipynb` is self-contained — runs top-to-bottom without manual steps
-- [ ] Every code cell is preceded by a **markdown cell** explaining what it does and why
-- [ ] No hardcoded credentials or account identifiers
-- [ ] Uses `SNOWFLAKE_CONNECTION_NAME` env variable for all connections
+All notebooks are Snowflake SQL notebooks:
+- File format: `.ipynb` with `"language_info": {"name": "sql"}`
+- Code cells contain SQL (executed by Snowflake)
+- Markdown cells contain explanations
 
----
-
-## Notebook Structure (learning-first)
-
-Notebooks must follow this narrative structure:
-1. **Use Case Overview** (markdown) — what problem this solves, why it matters for a SA
-2. **Setup & Imports** — connect to Snowflake, verify data is loaded
-3. **Data Exploration** — preview the data, understand its shape
-4. **Feature Demo** — demonstrate the GenAI capability with progressive examples (simple → complex)
-5. **Interpretation** — explain the output, discuss model/parameter choices
-6. **Cleanup** (optional) — drop temp objects if created
+### Narrative structure
+1. **Use Case Overview** — what problem this solves, key metadata table
+2. **Environment Setup** — `CREATE DATABASE`, `CREATE TABLE`, `INSERT` data
+3. **Data Exploration** — preview the data
+4. **Feature Demo** — progressive examples (simple → complex)
+5. **Key Takeaways** — summary and SA tips
 
 ---
 
-## Deployment Target
+## Deployment
 
-Primary deployment: **Snowflake Workspace** named `genai-labs` (created from the Git repo in Snowsight → Projects → Workspaces). Labs also run locally with Jupyter.
-
-## Snowflake Connection Pattern
-
-All notebooks use this auto-detection pattern — works in both Snowflake Workspaces and local Jupyter:
-
-```python
-import os
-import snowflake.connector
-
-conn = snowflake.connector.connect(
-    connection_name=os.getenv("SNOWFLAKE_CONNECTION_NAME") or "genai-labs"
-)
-```
-
-- **In a workspace**: the connection is provided by the workspace environment
-- **Locally**: set `export SNOWFLAKE_CONNECTION_NAME=<your_connection>` or name your connection `genai-labs`
+**Snowflake Workspace** named `genai-labs`. Clone the repo into the workspace, then open and run notebooks directly in Snowsight.
 
 ---
 
 ## Coding Conventions
 
 - SQL: uppercase keywords, `snake_case` identifiers
-- Python: PEP8; no inline comments — use markdown cells in notebooks for explanations
-- Never hardcode secrets, credentials, or account URLs
-- Prefer `SNOWFLAKE_SAMPLE_DATA` objects over external downloads where possible
+- No inline code comments — use markdown cells for explanations
+- No hardcoded secrets, credentials, or account URLs
+- All objects created in `GENAI_LEARNING.PUBLIC`
 
 ---
 
 ## Agent Instructions
 
 ### Before starting any example
-1. Check `SNOWFLAKE_SAMPLE_DATA` for a suitable dataset first
-2. Use `snowflake_product_docs` to verify the current API signature for the GenAI function being used — do not rely on prior knowledge
-3. Validate all SQL with `only_compile=true` before executing
+1. Check `SNOWFLAKE_SAMPLE_DATA` for suitable datasets first
+2. Use `snowflake_product_docs` to verify current API signatures
+3. Validate SQL with `only_compile=true` before executing
 
 ### Skill routing (mandatory)
-- Building a **semantic view** for Cortex Analyst → invoke `semantic-view` skill
-- Building a **Cortex Search service** → invoke `search-optimization` skill
-- Building a **Cortex Agent** → invoke `cortex-agent` skill
-- Building a **Streamlit demo app** → invoke `developing-with-streamlit` skill
-- Using **AI_CLASSIFY, AI_EXTRACT, AI_SUMMARIZE, etc.** → invoke `cortex-ai-functions` skill
+- Semantic view for Cortex Analyst → `semantic-view` skill
+- Cortex Search service → `search-optimization` skill
+- Cortex Agent → `cortex-agent` skill
+- AI_CLASSIFY, AI_EXTRACT, AI_SUMMARIZE, etc. → `cortex-ai-functions` skill
 
 ### Quality bar
-- Every example must be verifiable: run `setup.sql` then execute the notebook top-to-bottom without errors
-- If a dataset requires download, the `README.md` must include the exact download command or URL
-- Notebooks should be understandable by someone who has never used the specific feature before
+- Every notebook must run top-to-bottom without errors in a Snowflake Workspace
+- Notebooks should be understandable by someone who has never used the feature before
