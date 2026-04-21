@@ -49,7 +49,7 @@ export SNOWFLAKE_CONNECTION_NAME=<your_connection_name>
 ### Step 2 — Create the shared database (run once)
 
 ```bash
-snow sql -f shared/utils.sql --connection $SNOWFLAKE_CONNECTION_NAME
+snow sql --query "CREATE DATABASE IF NOT EXISTS GENAI_LEARNING; CREATE SCHEMA IF NOT EXISTS GENAI_LEARNING.PUBLIC;" --connection $SNOWFLAKE_CONNECTION_NAME
 ```
 
 This creates `GENAI_LEARNING` database and `PUBLIC` schema. All labs use this database.
@@ -89,7 +89,7 @@ Run this script to set up all labs in the correct dependency order:
 
 ```bash
 # Shared database
-snow sql -f shared/utils.sql --connection $SNOWFLAKE_CONNECTION_NAME
+snow sql --query "CREATE DATABASE IF NOT EXISTS GENAI_LEARNING; CREATE SCHEMA IF NOT EXISTS GENAI_LEARNING.PUBLIC;" --connection $SNOWFLAKE_CONNECTION_NAME
 
 # Phase 1 — Structured
 snow sql -f structured/cortex-analyst-sales/setup.sql   --connection $SNOWFLAKE_CONNECTION_NAME
