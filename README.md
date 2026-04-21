@@ -24,6 +24,13 @@ pip install snowflake-connector-python snowflake-core jupyter pandas matplotlib 
 
 ## Deployment
 
+### Step 0 — Clone the repo
+
+```bash
+git clone https://github.com/sfc-gh-lbeqiri/snow-genai-learning.git
+cd snow-genai-learning
+```
+
 ### Step 1 — Configure your Snowflake connection
 
 If you already have a named connection in `~/.snowflake/config.toml`, skip this step.
