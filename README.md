@@ -20,14 +20,21 @@ Deploy and run all labs directly inside Snowsight with zero local setup.
 ### Step 1 — Create a Snowflake workspace
 
 1. Open **Snowsight** → **Projects** → **Workspaces**
-2. Click **+ Workspace** → select **Create from Git Repository**
-3. Repository URL: `https://github.com/sfc-gh-lbeqiri/snow-genai-learning.git`
-4. Workspace name: **`genai-labs`**
-5. Click **Create**
+2. Click **+ Workspace**
+3. Workspace name: **`genai-labs`**
+4. Click **Create**
 
-The workspace clones the repo and provides an integrated terminal, file browser, and notebook runner.
+### Step 2 — Upload the lab files
 
-### Step 2 — Create the shared database
+From the workspace terminal, clone the repo:
+
+```bash
+git clone https://github.com/sfc-gh-lbeqiri/snow-genai-learning.git .
+```
+
+Alternatively, download the repo as a ZIP from GitHub and drag-and-drop the contents into the workspace file browser.
+
+### Step 3 — Create the shared database
 
 Open the workspace terminal and run:
 
@@ -42,7 +49,7 @@ Or via the terminal:
 snow sql --query "CREATE DATABASE IF NOT EXISTS GENAI_LEARNING; CREATE SCHEMA IF NOT EXISTS GENAI_LEARNING.PUBLIC;"
 ```
 
-### Step 3 — Deploy a lab
+### Step 4 — Deploy a lab
 
 Each lab is self-contained. From the workspace terminal:
 
@@ -60,7 +67,7 @@ snow sql -f structured/ai-classify-orders/setup.sql
 
 Then open `structured/ai-classify-orders/notebook.ipynb` and run all cells.
 
-### Step 4 — Deploy all labs in sequence
+### Step 5 — Deploy all labs in sequence
 
 Run from the workspace terminal:
 
