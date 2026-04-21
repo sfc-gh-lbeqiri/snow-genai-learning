@@ -8,137 +8,148 @@ A practical, hands-on learning repository for Snowflake Solutions Architects to 
 
 | Requirement | Details |
 |---|---|
-| Snowflake account | Cortex AI features must be enabled (available on Business Critical and above, or enabled on request) |
-| Python | 3.9 or higher |
-| Python packages | `snowflake-connector-python`, `snowflake-core`, `jupyter`, `pandas` |
-| Snowflake CLI | `snow` CLI configured with a named connection — [install guide](https://docs.snowflake.com/en/developer-guide/snowflake-cli/installation/installation) |
+| Snowflake account | Cortex AI features enabled (Business Critical+, or enabled on request) |
 | Warehouse | Any active warehouse (XSmall is sufficient for most labs) |
 
-Install Python dependencies:
+---
+
+## Deployment — Snowflake Workspace (Recommended)
+
+Deploy and run all labs directly inside Snowsight with zero local setup.
+
+### Step 1 — Create a Snowflake workspace
+
+1. Open **Snowsight** → **Projects** → **Workspaces**
+2. Click **+ Workspace** → select **Create from Git Repository**
+3. Repository URL: `https://github.com/sfc-gh-lbeqiri/snow-genai-learning.git`
+4. Workspace name: **`genai-labs`**
+5. Click **Create**
+
+The workspace clones the repo and provides an integrated terminal, file browser, and notebook runner.
+
+### Step 2 — Create the shared database
+
+Open the workspace terminal and run:
+
+```sql
+CREATE DATABASE IF NOT EXISTS GENAI_LEARNING;
+CREATE SCHEMA IF NOT EXISTS GENAI_LEARNING.PUBLIC;
+```
+
+Or via the terminal:
+
+```bash
+snow sql --query "CREATE DATABASE IF NOT EXISTS GENAI_LEARNING; CREATE SCHEMA IF NOT EXISTS GENAI_LEARNING.PUBLIC;"
+```
+
+### Step 3 — Deploy a lab
+
+Each lab is self-contained. From the workspace terminal:
+
+```bash
+snow sql -f <lab_path>/setup.sql
+```
+
+Then open `<lab_path>/notebook.ipynb` in the workspace notebook runner and execute cells interactively.
+
+**Example — deploy the AI_CLASSIFY lab:**
+
+```bash
+snow sql -f structured/ai-classify-orders/setup.sql
+```
+
+Then open `structured/ai-classify-orders/notebook.ipynb` and run all cells.
+
+### Step 4 — Deploy all labs in sequence
+
+Run from the workspace terminal:
+
+```bash
+# Shared database
+snow sql --query "CREATE DATABASE IF NOT EXISTS GENAI_LEARNING; CREATE SCHEMA IF NOT EXISTS GENAI_LEARNING.PUBLIC;"
+
+# Phase 1 — Structured
+snow sql -f structured/cortex-analyst-sales/setup.sql
+snow sql -f structured/ai-classify-orders/setup.sql
+snow sql -f structured/ai-sentiment-reviews/setup.sql
+snow sql -f structured/ai-agg-sales/setup.sql
+
+# Phase 2 — Semi-Structured
+snow sql -f semi-structured/ai-extract-logs/setup.sql
+snow sql -f semi-structured/ai-filter-feedback/setup.sql
+snow sql -f semi-structured/ai-translate-catalog/setup.sql
+snow sql -f semi-structured/cortex-complete-general/setup.sql
+
+# Phase 3 — Unstructured
+snow sql -f unstructured/ai-summarize-articles/setup.sql
+snow sql -f unstructured/ai-parse-invoices/setup.sql
+snow sql -f unstructured/ai-redact-pii/setup.sql
+snow sql -f unstructured/cortex-search-rag/setup.sql
+
+# Phase 4 — Advanced (depends on all prior phases)
+snow sql -f unstructured/cortex-agent-orchestrator/setup.sql
+```
+
+### Special setup notes
+
+**AI_PARSE_DOCUMENT lab** — requires generating sample PDFs first:
+
+```bash
+cd unstructured/ai-parse-invoices
+pip install fpdf2
+python generate_invoices.py
+```
+
+**Cortex Search RAG lab** — the `setup.sql` creates a `CORTEX SEARCH SERVICE`. Update the warehouse name in `setup.sql` if yours differs from `COMPUTE_WH`.
+
+**Cortex Analyst lab** — after running `setup.sql`, open the notebook and run **Step 2** (the `PUT` cell) to upload the semantic model YAML to the stage before querying.
+
+---
+
+## Deployment — Local (Alternative)
+
+Run labs from your local machine using Jupyter.
+
+### Prerequisites (local only)
+
+| Requirement | Details |
+|---|---|
+| Python | 3.9+ |
+| Snowflake CLI | `snow` CLI with a named connection — [install guide](https://docs.snowflake.com/en/developer-guide/snowflake-cli/installation/installation) |
 
 ```bash
 pip install snowflake-connector-python snowflake-core jupyter pandas matplotlib fpdf2
 ```
 
----
-
-## Deployment
-
-### Step 0 — Clone the repo
+### Step 1 — Clone the repo
 
 ```bash
 git clone https://github.com/sfc-gh-lbeqiri/snow-genai-learning.git
 cd snow-genai-learning
 ```
 
-### Step 1 — Configure your Snowflake connection
-
-If you already have a named connection in `~/.snowflake/config.toml`, skip this step.
+### Step 2 — Configure your connection
 
 ```bash
-snow connection add
-```
-
-Follow the prompts to set account, user, role, and warehouse. Then verify:
-
-```bash
+snow connection add          # follow prompts if needed
 snow connection test --connection <your_connection_name>
-```
-
-Set it as your default for this repo:
-
-```bash
 export SNOWFLAKE_CONNECTION_NAME=<your_connection_name>
 ```
 
----
-
-### Step 2 — Create the shared database (run once)
+### Step 3 — Create the shared database
 
 ```bash
 snow sql --query "CREATE DATABASE IF NOT EXISTS GENAI_LEARNING; CREATE SCHEMA IF NOT EXISTS GENAI_LEARNING.PUBLIC;" --connection $SNOWFLAKE_CONNECTION_NAME
 ```
 
-This creates `GENAI_LEARNING` database and `PUBLIC` schema. All labs use this database.
-
----
-
-### Step 3 — Deploy a lab
-
-Each lab is self-contained. To deploy any lab:
+### Step 4 — Deploy a lab
 
 ```bash
-# 1. Run the setup SQL (creates tables, views, stages, loads data)
 snow sql -f <lab_path>/setup.sql --connection $SNOWFLAKE_CONNECTION_NAME
-
-# 2. Execute the notebook end-to-end
-jupyter nbconvert --to notebook --execute <lab_path>/notebook.ipynb --inplace
-```
-
-**Example — deploy the AI_CLASSIFY lab:**
-
-```bash
-snow sql -f structured/ai-classify-orders/setup.sql --connection $SNOWFLAKE_CONNECTION_NAME
-jupyter nbconvert --to notebook --execute structured/ai-classify-orders/notebook.ipynb --inplace
-```
-
-**Or open interactively in Jupyter:**
-
-```bash
 jupyter notebook <lab_path>/notebook.ipynb
 ```
 
----
-
-### Step 4 — Deploy all labs in sequence
-
-Run this script to set up all labs in the correct dependency order:
-
-```bash
-# Shared database
-snow sql --query "CREATE DATABASE IF NOT EXISTS GENAI_LEARNING; CREATE SCHEMA IF NOT EXISTS GENAI_LEARNING.PUBLIC;" --connection $SNOWFLAKE_CONNECTION_NAME
-
-# Phase 1 — Structured
-snow sql -f structured/cortex-analyst-sales/setup.sql   --connection $SNOWFLAKE_CONNECTION_NAME
-snow sql -f structured/ai-classify-orders/setup.sql     --connection $SNOWFLAKE_CONNECTION_NAME
-snow sql -f structured/ai-sentiment-reviews/setup.sql   --connection $SNOWFLAKE_CONNECTION_NAME
-snow sql -f structured/ai-agg-sales/setup.sql           --connection $SNOWFLAKE_CONNECTION_NAME
-
-# Phase 2 — Semi-Structured
-snow sql -f semi-structured/ai-extract-logs/setup.sql       --connection $SNOWFLAKE_CONNECTION_NAME
-snow sql -f semi-structured/ai-filter-feedback/setup.sql    --connection $SNOWFLAKE_CONNECTION_NAME
-snow sql -f semi-structured/ai-translate-catalog/setup.sql  --connection $SNOWFLAKE_CONNECTION_NAME
-snow sql -f semi-structured/cortex-complete-general/setup.sql --connection $SNOWFLAKE_CONNECTION_NAME
-
-# Phase 3 — Unstructured
-snow sql -f unstructured/ai-summarize-articles/setup.sql --connection $SNOWFLAKE_CONNECTION_NAME
-snow sql -f unstructured/ai-parse-invoices/setup.sql     --connection $SNOWFLAKE_CONNECTION_NAME
-snow sql -f unstructured/ai-redact-pii/setup.sql         --connection $SNOWFLAKE_CONNECTION_NAME
-snow sql -f unstructured/cortex-search-rag/setup.sql     --connection $SNOWFLAKE_CONNECTION_NAME
-
-# Phase 4 — Advanced (depends on all prior phases)
-snow sql -f unstructured/cortex-agent-orchestrator/setup.sql --connection $SNOWFLAKE_CONNECTION_NAME
-```
-
----
-
-### Special setup: AI_PARSE_DOCUMENT lab
-
-This lab requires generating sample PDFs before running the notebook:
-
-```bash
-cd unstructured/ai-parse-invoices
-python generate_invoices.py
-jupyter notebook notebook.ipynb
-```
-
-### Special setup: Cortex Search RAG lab
-
-The `setup.sql` creates a `CORTEX SEARCH SERVICE`. Update the warehouse name in `setup.sql` to match your account if it differs from `COMPUTE_WH` before running.
-
-### Special setup: Cortex Analyst lab
-
-After running `setup.sql`, open the notebook and run **Step 2** (the `PUT` cell) to upload the semantic model YAML to the stage. This must be done before querying the agent.
+All notebooks auto-detect the connection: they use `SNOWFLAKE_CONNECTION_NAME` env variable if set, or fall back to the default `genai-labs` connection name.
 
 ---
 
@@ -181,8 +192,16 @@ After running `setup.sql`, open the notebook and run **Step 2** (the `PUT` cell)
 
 ## Teardown
 
-To remove all objects created by this repo:
+Remove all Snowflake objects created by the labs:
+
+```sql
+DROP DATABASE IF EXISTS GENAI_LEARNING;
+```
+
+Or from a terminal:
 
 ```bash
-snow sql --query "DROP DATABASE IF EXISTS GENAI_LEARNING" --connection $SNOWFLAKE_CONNECTION_NAME
+snow sql --query "DROP DATABASE IF EXISTS GENAI_LEARNING"
 ```
+
+To delete the workspace, go to **Snowsight** → **Projects** → **Workspaces** → select `genai-labs` → **Delete**.

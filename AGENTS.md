@@ -21,24 +21,20 @@ This repo is a **practical learning resource for a Snowflake Solutions Architect
 ```
 snow-genai-learning/
 ├── AGENTS.md
+├── README.md
 ├── requirements.md
 ├── structured/
 │   └── <use-case-name>/
 │       ├── setup.sql         # DDL + data generation/load (must run first)
-│       ├── notebook.ipynb    # End-to-end walkthrough with narrative
-│       └── README.md         # Use case summary, dataset source, run instructions
+│       └── notebook.ipynb    # End-to-end walkthrough with narrative
 ├── semi-structured/
 │   └── <use-case-name>/
 │       ├── setup.sql
-│       ├── notebook.ipynb
-│       └── README.md
-├── unstructured/
-│   └── <use-case-name>/
-│       ├── setup.sql
-│       ├── notebook.ipynb
-│       └── README.md
-└── shared/
-    └── utils.sql             # Reusable SQL helpers
+│       └── notebook.ipynb
+└── unstructured/
+    └── <use-case-name>/
+        ├── setup.sql
+        └── notebook.ipynb
 ```
 
 Name use-case directories in lowercase with hyphens, e.g. `cortex-analyst-sales`, `document-qa-rag`.
@@ -82,7 +78,6 @@ Each example directory must satisfy:
 - [ ] `setup.sql` runs cleanly from scratch — creates DB/schema/stage/table, loads or generates data
 - [ ] `notebook.ipynb` is self-contained — runs top-to-bottom without manual steps
 - [ ] Every code cell is preceded by a **markdown cell** explaining what it does and why
-- [ ] `README.md` states: use case description, dataset source + link, prerequisites, run steps
 - [ ] No hardcoded credentials or account identifiers
 - [ ] Uses `SNOWFLAKE_CONNECTION_NAME` env variable for all connections
 
@@ -100,18 +95,25 @@ Notebooks must follow this narrative structure:
 
 ---
 
+## Deployment Target
+
+Primary deployment: **Snowflake Workspace** named `genai-labs` (created from the Git repo in Snowsight → Projects → Workspaces). Labs also run locally with Jupyter.
+
 ## Snowflake Connection Pattern
+
+All notebooks use this auto-detection pattern — works in both Snowflake Workspaces and local Jupyter:
 
 ```python
 import os
 import snowflake.connector
 
 conn = snowflake.connector.connect(
-    connection_name=os.getenv("SNOWFLAKE_CONNECTION_NAME") or "<active_connection>"
+    connection_name=os.getenv("SNOWFLAKE_CONNECTION_NAME") or "genai-labs"
 )
 ```
 
-Always run with: `SNOWFLAKE_CONNECTION_NAME=<name> jupyter nbconvert --to notebook --execute notebook.ipynb`
+- **In a workspace**: the connection is provided by the workspace environment
+- **Locally**: set `export SNOWFLAKE_CONNECTION_NAME=<your_connection>` or name your connection `genai-labs`
 
 ---
 
