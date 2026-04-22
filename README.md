@@ -18,16 +18,13 @@ Every lab is a **Snowflake-native SQL Notebook** that runs directly in **Snowsig
 
 ## Getting Started
 
-### Option A — Snowflake Workspace
+### Option A — Import the Full Repo (recommended)
 
-1. **Snowsight** → **Projects** → **Workspaces** → **+ Workspace** → name it **`genai-labs`**
-2. In the workspace terminal:
-   ```bash
-   git clone https://github.com/sfc-gh-lbeqiri/snow-genai-learning.git .
-   ```
+1. **Snowsight** → **Projects** → **Notebooks** → **Create from repository**
+2. Connect to `https://github.com/sfc-gh-lbeqiri/snow-genai-learning.git`
 3. Open any `notebook.ipynb` → **Run All**
 
-### Option B — Snowsight Notebooks (no workspace)
+### Option B — Import a Single Notebook
 
 1. Download a single `notebook.ipynb` from the repo
 2. **Snowsight** → **Projects** → **Notebooks** → **Import .ipynb**
@@ -121,4 +118,4 @@ Remove all objects created by the labs:
 DROP DATABASE IF EXISTS GENAI_LEARNING;
 ```
 
-Delete the workspace: **Snowsight** → **Projects** → **Workspaces** → `genai-labs` → **Delete**
+To remove imported notebooks: **Snowsight** → **Projects** → **Notebooks** → select → **Delete**

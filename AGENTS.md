@@ -124,7 +124,7 @@ All notebooks use the Snowflake-native format:
 
 ## Deployment
 
-**Snowflake Workspace** named `genai-labs`. Clone the repo into the workspace, then open and run notebooks directly in Snowsight.
+Import notebooks into **Snowsight** → **Projects** → **Notebooks** (from repository or individual .ipynb import). Run directly in Snowsight — no workspace or local tooling needed.
 
 ---
 
