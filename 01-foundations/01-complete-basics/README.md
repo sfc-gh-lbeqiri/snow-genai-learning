@@ -18,6 +18,15 @@ The foundational function for calling LLMs inside Snowflake SQL.
 
 1.0 Gen AI Overview, 2.0 Gen AI & LLM Functions
 
+## Available Models
+
+To see all Cortex LLM models available in your account, run as `ACCOUNTADMIN`:
+
+```sql
+CALL SNOWFLAKE.MODELS.CORTEX_BASE_MODELS_REFRESH();
+SHOW MODELS IN SNOWFLAKE.MODELS;
+```
+
 ## How to Run
 
 1. Open Snowsight → Notebooks

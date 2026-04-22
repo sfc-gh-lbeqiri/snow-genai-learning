@@ -173,6 +173,17 @@ When referencing Snowflake official documentation, prefer the agent-friendly Mar
 
 See [release note](https://docs.snowflake.com/en/release-notes/2026/other/2026-04-15-agent-friendly-docs) for details.
 
+### Refreshing the available model list
+
+To get the current list of Cortex LLM models available in the account:
+
+```sql
+CALL SNOWFLAKE.MODELS.CORTEX_BASE_MODELS_REFRESH();
+SHOW MODELS IN SNOWFLAKE.MODELS;
+```
+
+Run this as `ACCOUNTADMIN`. The refresh populates `SNOWFLAKE.MODELS` with all currently available Cortex base models.
+
 ### Before starting any example
 1. Check `SNOWFLAKE_SAMPLE_DATA` for suitable datasets first
 2. Use `snowflake_product_docs` or the `.md` doc URLs above to verify current API signatures
