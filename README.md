@@ -23,6 +23,7 @@ Run [`00-admin-setup/notebook.ipynb`](00-admin-setup/) **before** any other lab.
 - **USERADMIN** creates the role
 - **SYSADMIN** creates the warehouse
 - **SECURITYADMIN** manages grants and places `DS_ROLE` under `SYSADMIN` in the standard role hierarchy
+- **ACCOUNTADMIN** grants the account-level `CREATE DATABASE` privilege
 
 The notebook also includes a teardown cell to clean up when you're done.
 
