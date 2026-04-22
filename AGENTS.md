@@ -139,9 +139,17 @@ Import notebooks into **Snowsight** → **Projects** → **Notebooks** (from rep
 
 ## Agent Instructions
 
+### Snowflake documentation lookup
+When referencing Snowflake official documentation, prefer the agent-friendly Markdown versions by appending `.md` to the URL. These are smaller, strip navigation/scripts, and are optimised for LLM context.
+
+- **Markdown page:** append `.md` to any docs URL, e.g. `https://docs.snowflake.com/sql-reference/sql/create-table.md`
+- **Section indexes:** `https://docs.snowflake.com/llms.txt` links to per-section `llms.txt` files (e.g. `sql-reference/sql/llms.txt`). Fetch only the sections you need to reduce token usage.
+
+See [release note](https://docs.snowflake.com/en/release-notes/2026/other/2026-04-15-agent-friendly-docs) for details.
+
 ### Before starting any example
 1. Check `SNOWFLAKE_SAMPLE_DATA` for suitable datasets first
-2. Use `snowflake_product_docs` to verify current API signatures
+2. Use `snowflake_product_docs` or the `.md` doc URLs above to verify current API signatures
 3. Validate SQL with `only_compile=true` before executing
 
 ### Skill routing (mandatory)
