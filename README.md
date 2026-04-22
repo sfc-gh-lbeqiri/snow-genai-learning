@@ -131,17 +131,6 @@ These 18 labs map to the **SnowPro Specialty: Generative AI** exam domains:
 
 ## Teardown
 
-Run the teardown cell in [`00-admin-setup/notebook.ipynb`](00-admin-setup/) to drop the database, warehouse, and role. Or run manually:
-
-```sql
-USE ROLE DS_ROLE;
-DROP DATABASE IF EXISTS GENAI_LEARNING;
-
-USE ROLE SECURITYADMIN;
-DROP WAREHOUSE IF EXISTS DS_WH;
-
-USE ROLE USERADMIN;
-DROP ROLE IF EXISTS DS_ROLE;
-```
+Run the teardown cells at the bottom of [`00-admin-setup/notebook.ipynb`](00-admin-setup/) to drop the database, warehouse, and role.
 
 To remove imported notebooks: **Snowsight** → **Projects** → **Notebooks** → select → **Delete**
