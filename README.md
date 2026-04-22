@@ -11,8 +11,20 @@ Every lab is a **Snowflake-native SQL Notebook** that runs directly in **Snowsig
 | Requirement | Details |
 |---|---|
 | Snowflake account | Cortex AI enabled |
-| Warehouse | Any active warehouse (`COMPUTE_WH` used by default, XSmall is fine) |
-| Role | `ACCOUNTADMIN` or a role with `CREATE DATABASE` privileges |
+| Role | `DS_ROLE` (created below) |
+| Warehouse | `DS_WH` (created below — XSmall is sufficient) |
+
+Every notebook starts with `USE ROLE DS_ROLE` and `USE WAREHOUSE DS_WH`. If your environment uses different names, update the first cell in each notebook.
+
+### One-Time RBAC Setup
+
+Run [`00-admin-setup/notebook.ipynb`](00-admin-setup/) **before** any other lab. It creates `DS_ROLE`, `DS_WH`, and all required grants following [Snowflake RBAC best practices](https://docs.snowflake.com/en/user-guide/security-access-control-considerations):
+
+- **USERADMIN** creates the role
+- **SYSADMIN** creates the warehouse
+- **SECURITYADMIN** manages grants and places `DS_ROLE` under `SYSADMIN` in the standard role hierarchy
+
+The notebook also includes a teardown cell to clean up when you're done.
 
 ---
 
@@ -33,6 +45,12 @@ Every lab is a **Snowflake-native SQL Notebook** that runs directly in **Snowsig
 ---
 
 ## Lab Map — Learning Journey
+
+### Part 0: Admin Setup
+
+| # | Lab | Topic | Description |
+|---|---|---|---|
+| 00 | [`00-admin-setup`](00-admin-setup/) | RBAC, Role Hierarchy | Create DS_ROLE, DS_WH, and all grants — run once before starting |
 
 ### Part 1: Foundations (Labs 01–03)
 
@@ -101,7 +119,7 @@ These 18 labs map to the **SnowPro Specialty: Generative AI** exam domains:
 ## Notes on Specific Labs
 
 - **Lab 07** — `AI_PARSE_DOCUMENT` requires PDFs on the `@invoice_pdfs` stage. Upload via Snowsight or PUT.
-- **Lab 09** — Creates a `CORTEX SEARCH SERVICE` using warehouse `COMPUTE_WH`. Edit if your warehouse differs.
+- **Lab 09** — Creates a `CORTEX SEARCH SERVICE` using warehouse `DS_WH`.
 - **Lab 10** — Depends on Lab 06 (wiki_articles) and Lab 09 (search service).
 - **Lab 11** — Stages `sales_semantic_model.yaml` to `@semantic_models`. The PUT command is in the notebook.
 - **Lab 12** — Documents the Agent REST API spec; actual agent calls require a Streamlit app or REST client.
@@ -112,10 +130,17 @@ These 18 labs map to the **SnowPro Specialty: Generative AI** exam domains:
 
 ## Teardown
 
-Remove all objects created by the labs:
+Run the teardown cell in [`00-admin-setup/notebook.ipynb`](00-admin-setup/) to drop the database, warehouse, and role. Or run manually:
 
 ```sql
+USE ROLE DS_ROLE;
 DROP DATABASE IF EXISTS GENAI_LEARNING;
+
+USE ROLE SECURITYADMIN;
+DROP WAREHOUSE IF EXISTS DS_WH;
+
+USE ROLE USERADMIN;
+DROP ROLE IF EXISTS DS_ROLE;
 ```
 
 To remove imported notebooks: **Snowsight** → **Projects** → **Notebooks** → select → **Delete**
