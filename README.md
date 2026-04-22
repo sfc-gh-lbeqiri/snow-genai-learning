@@ -57,9 +57,9 @@ The notebook also includes a teardown cell to clean up when you're done.
 
 | # | Lab | Functions | Description |
 |---|---|---|---|
-| 01 | [`01-complete-basics`](01-foundations/01-complete-basics/) | `COMPLETE` | Prompts, system/user messages, options, patterns, model comparison |
-| 02 | [`02-complete-advanced`](01-foundations/02-complete-advanced/) | `TRY_COMPLETE`, `COUNT_TOKENS`, `SPLIT_TEXT` | Structured outputs (JSON mode), error handling, token management |
-| 03 | [`03-embeddings-vectors`](01-foundations/03-embeddings-vectors/) | `EMBED_TEXT_768/1024`, all 4 vector distances | Embeddings, storage, nearest-neighbor search |
+| 01 | [`01-complete-basics`](01-foundations/01-complete-basics/) | `AI_COMPLETE` | Prompts, system/user messages, options, patterns, model comparison |
+| 02 | [`02-complete-advanced`](01-foundations/02-complete-advanced/) | `AI_COMPLETE`, `AI_COUNT_TOKENS`, `TRY_COMPLETE`¹, `SPLIT_TEXT`¹ | Structured outputs (JSON mode), error handling, token management |
+| 03 | [`03-embeddings-vectors`](01-foundations/03-embeddings-vectors/) | `AI_EMBED`, all 4 vector distances | Embeddings, storage, nearest-neighbor search |
 
 ### Part 2: AI Functions (Labs 04–08)
 
@@ -69,16 +69,16 @@ Paired complementary functions — learn two related tools per lab.
 |---|---|---|---|
 | 04 | [`04-classify-sentiment`](02-ai-functions/04-classify-sentiment/) | `AI_CLASSIFY` + `AI_SENTIMENT` | Categorization with custom labels + continuous sentiment scoring |
 | 05 | [`05-extract-filter`](02-ai-functions/05-extract-filter/) | `AI_EXTRACT` + `AI_FILTER` | Pull structure from text + semantic WHERE clauses |
-| 06 | [`06-summarize-translate`](02-ai-functions/06-summarize-translate/) | `AI_SUMMARIZE` + `AI_TRANSLATE` | Text condensation + multilingual support + chaining |
+| 06 | [`06-summarize-translate`](02-ai-functions/06-summarize-translate/) | `AI_SUMMARIZE_AGG` + `AI_TRANSLATE` | Text condensation + multilingual support + chaining |
 | 07 | [`07-redact-parse`](02-ai-functions/07-redact-parse/) | `AI_REDACT` + `AI_PARSE_DOCUMENT` | PII masking + document OCR/layout extraction |
-| 08 | [`08-agg-extract-answer`](02-ai-functions/08-agg-extract-answer/) | `AI_AGG` + `EXTRACT_ANSWER` | Numbers-to-narrative + extractive QA |
+| 08 | [`08-agg-extract-answer`](02-ai-functions/08-agg-extract-answer/) | `AI_AGG` + `EXTRACT_ANSWER`¹ | Numbers-to-narrative + extractive QA |
 
 ### Part 3: Search & RAG (Labs 09–10)
 
 | # | Lab | Functions | Description |
 |---|---|---|---|
 | 09 | [`09-cortex-search`](03-search-and-rag/09-cortex-search/) | Cortex Search Service | Managed semantic search: DDL, TARGET_LAG, hybrid search |
-| 10 | [`10-rag-pattern`](03-search-and-rag/10-rag-pattern/) | Embed + Search + Complete | Full RAG pipeline: retrieve context → generate grounded answer |
+| 10 | [`10-rag-pattern`](03-search-and-rag/10-rag-pattern/) | `AI_EMBED` + Search + `AI_COMPLETE` | Full RAG pipeline: retrieve context → generate grounded answer |
 
 ### Part 4: Analyst & Agents (Labs 11–12)
 
@@ -100,8 +100,10 @@ Paired complementary functions — learn two related tools per lab.
 | # | Lab | Functions | Description |
 |---|---|---|---|
 | 16 | [`16-access-controls`](06-governance/16-access-controls/) | `CORTEX_MODELS_ALLOWLIST`, RBAC | Model allowlists, cross-region policy, network rules |
-| 17 | [`17-cost-monitoring`](06-governance/17-cost-monitoring/) | ACCOUNT_USAGE views, `COUNT_TOKENS` | Credit tracking, per-function costs, optimization strategies |
+| 17 | [`17-cost-monitoring`](06-governance/17-cost-monitoring/) | ACCOUNT_USAGE views, `AI_COUNT_TOKENS` | Credit tracking, per-function costs, optimization strategies |
 | 18 | [`18-observability`](06-governance/18-observability/) | Event Tables, LLM-as-Judge | Query history, telemetry, automated quality evaluation |
+
+¹ No `AI_` prefixed equivalent yet — remains under `SNOWFLAKE.CORTEX` namespace.
 
 ---
 

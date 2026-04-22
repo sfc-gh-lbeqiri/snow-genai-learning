@@ -65,24 +65,24 @@ Each notebook contains:
 ### Part 1: Foundations (Labs 01–03)
 | Lab | Functions | Data |
 |---|---|---|
-| 01 Complete Basics | `COMPLETE` | Prompt experiments |
-| 02 Complete Advanced | `TRY_COMPLETE`, `COUNT_TOKENS`, `SPLIT_TEXT` | Mixed |
-| 03 Embeddings & Vectors | `EMBED_TEXT_768/1024`, all 4 vector distances | Embedding store |
+| 01 Complete Basics | `AI_COMPLETE` | Prompt experiments |
+| 02 Complete Advanced | `AI_COMPLETE`, `AI_COUNT_TOKENS`, `TRY_COMPLETE`¹, `SPLIT_TEXT`¹ | Mixed |
+| 03 Embeddings & Vectors | `AI_EMBED`, all 4 vector distances | Embedding store |
 
 ### Part 2: AI Functions (Labs 04–08) — Paired complementary functions
 | Lab | Functions | Data |
 |---|---|---|
 | 04 Classify + Sentiment | `AI_CLASSIFY` + `AI_SENTIMENT` | TPC-H ORDERS + 9 reviews |
 | 05 Extract + Filter | `AI_EXTRACT` + `AI_FILTER` | 6 logs + 8 feedback records |
-| 06 Summarize + Translate | `AI_SUMMARIZE` + `AI_TRANSLATE` | 3 articles + 7 catalog entries |
+| 06 Summarize + Translate | `AI_SUMMARIZE_AGG` + `AI_TRANSLATE` | 3 articles + 7 catalog entries |
 | 07 Redact + Parse | `AI_REDACT` + `AI_PARSE_DOCUMENT` | 5 PII records + staged PDFs |
-| 08 Agg + Extract Answer | `AI_AGG` + `EXTRACT_ANSWER` | TPC-H LINEITEM + 3 QA docs |
+| 08 Agg + Extract Answer | `AI_AGG` + `EXTRACT_ANSWER`¹ | TPC-H LINEITEM + 3 QA docs |
 
 ### Part 3: Search & RAG (Labs 09–10)
 | Lab | Functions | Data |
 |---|---|---|
 | 09 Cortex Search | Cortex Search Service DDL | wiki_articles |
-| 10 RAG Pattern | Embed → Search → Complete | rag_knowledge_base |
+| 10 RAG Pattern | `AI_EMBED` → Search → `AI_COMPLETE` | rag_knowledge_base |
 
 ### Part 4: Analyst & Agents (Labs 11–12)
 | Lab | Functions | Data |
@@ -101,8 +101,34 @@ Each notebook contains:
 | Lab | Functions | Data |
 |---|---|---|
 | 16 Access Controls | `CORTEX_MODELS_ALLOWLIST`, cross-region | Account params |
-| 17 Cost Monitoring | `ACCOUNT_USAGE` views, `COUNT_TOKENS` | Usage history |
+| 17 Cost Monitoring | `ACCOUNT_USAGE` views, `AI_COUNT_TOKENS` | Usage history |
 | 18 Observability | Event Tables, LLM-as-Judge | Evaluation samples |
+
+¹ No `AI_` prefixed equivalent yet — remains under `SNOWFLAKE.CORTEX` namespace.
+
+---
+
+## SQL Function Naming
+
+All labs use the preferred **`AI_` prefixed SQL functions** as primary (e.g. `AI_COMPLETE`, `AI_EMBED`, `AI_CLASSIFY`). Each notebook includes a note cell mapping to the legacy `SNOWFLAKE.CORTEX.*` equivalents.
+
+| AI_ Function | Legacy Equivalent |
+|---|---|
+| `AI_COMPLETE` | `SNOWFLAKE.CORTEX.COMPLETE` |
+| `AI_EMBED` | `SNOWFLAKE.CORTEX.EMBED_TEXT_768` / `EMBED_TEXT_1024` |
+| `AI_CLASSIFY` | `SNOWFLAKE.CORTEX.CLASSIFY_TEXT` |
+| `AI_SENTIMENT` | `SNOWFLAKE.CORTEX.SENTIMENT` / `ENTITY_SENTIMENT` |
+| `AI_TRANSLATE` | `SNOWFLAKE.CORTEX.TRANSLATE` |
+| `AI_SUMMARIZE_AGG` | `SNOWFLAKE.CORTEX.SUMMARIZE` |
+| `AI_COUNT_TOKENS` | `SNOWFLAKE.CORTEX.COUNT_TOKENS` |
+| `AI_REDACT` | *(new — no legacy equivalent)* |
+| `AI_EXTRACT` | *(new — no legacy equivalent)* |
+| `AI_FILTER` | *(new — no legacy equivalent)* |
+| `AI_AGG` | *(new — no legacy equivalent)* |
+| `AI_SIMILARITY` | *(new — no legacy equivalent)* |
+| `AI_PARSE_DOCUMENT` | `SNOWFLAKE.CORTEX.PARSE_DOCUMENT` |
+
+Functions with **no `AI_` equivalent yet**: `TRY_COMPLETE`, `EXTRACT_ANSWER`, `SPLIT_TEXT_RECURSIVE_CHARACTER`, `FINETUNE`.
 
 ---
 
@@ -156,7 +182,7 @@ See [release note](https://docs.snowflake.com/en/release-notes/2026/other/2026-0
 - Semantic view for Cortex Analyst → `semantic-view` skill
 - Cortex Search service → `search-optimization` skill
 - Cortex Agent → `cortex-agent` skill
-- AI_CLASSIFY, AI_EXTRACT, AI_SUMMARIZE, etc. → `cortex-ai-functions` skill
+- AI_CLASSIFY, AI_EXTRACT, AI_SUMMARIZE_AGG, etc. → `cortex-ai-functions` skill
 
 ### Quality bar
 - Every notebook must run top-to-bottom without errors in a Snowflake Workspace
