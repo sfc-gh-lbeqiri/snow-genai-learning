@@ -1,22 +1,21 @@
 # AI_SENTIMENT — Product Review Sentiment Analysis
 
-**Data modality:** Structured
-**Feature:** AI_SENTIMENT
-**Dataset:** Synthetic product reviews (generated inline, no download)
+| | |
+|---|---|
+| **Data modality** | Structured |
+| **Feature** | `SNOWFLAKE.CORTEX.AI_SENTIMENT` |
+| **Dataset** | 30 synthetic product reviews (created inline) |
 
-## What this example teaches
+## What you will learn
 
-How to use `AI_SENTIMENT` to score free-text reviews on a -1 to +1 scale, validate results against star ratings, and identify products needing attention.
+Score review text on a -1 to +1 scale, compare with star ratings, and surface mismatches.
 
-## Run instructions
+## How to run
 
-```bash
-snow sql -f ../../shared/utils.sql  # once
-snow sql -f setup.sql
-export SNOWFLAKE_CONNECTION_NAME=<your_connection>
-jupyter nbconvert --to notebook --execute notebook.ipynb --inplace
-```
+1. Open `notebook.ipynb` in **Snowsight** (via a workspace or direct notebook import)
+2. Select a warehouse when prompted
+3. **Run All** — the notebook creates all objects and data inline
 
-## Dataset
+## Dependencies
 
-30 synthetic product reviews generated inline via `INSERT INTO` statements. No external download required.
+None

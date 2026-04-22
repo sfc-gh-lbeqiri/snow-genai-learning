@@ -1,24 +1,21 @@
-# CORTEX.COMPLETE — Prompt Engineering Patterns
+# CORTEX.COMPLETE — LLM Completion Patterns
 
-**Data modality:** Semi-Structured / Any
-**Feature:** SNOWFLAKE.CORTEX.COMPLETE
-**Dataset:** Reuses tables from Phases 1 and 2 (no new data needed)
+| | |
+|---|---|
+| **Data modality** | Any |
+| **Feature** | `SNOWFLAKE.CORTEX.COMPLETE` |
+| **Dataset** | 5 prompt experiments (created inline) |
 
-## What this example teaches
+## What you will learn
 
-Five progressive prompt engineering patterns: simple instruction → data-grounded generation → structured JSON output → few-shot classification → multi-model comparison.
+Five prompt engineering patterns: zero-shot, few-shot, chain-of-thought, extraction, summarization. Plus multi-model comparison.
 
-## Prerequisites
+## How to run
 
-Run these first (they create the tables used here):
-- `structured/ai-sentiment-reviews/setup.sql`
-- `structured/ai-classify-orders/setup.sql`
+1. Open `notebook.ipynb` in **Snowsight** (via a workspace or direct notebook import)
+2. Select a warehouse when prompted
+3. **Run All** — the notebook creates all objects and data inline
 
-## Run instructions
+## Dependencies
 
-```bash
-snow sql -f ../../shared/utils.sql  # once
-snow sql -f setup.sql
-export SNOWFLAKE_CONNECTION_NAME=<your_connection>
-jupyter nbconvert --to notebook --execute notebook.ipynb --inplace
-```
+None

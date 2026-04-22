@@ -1,18 +1,21 @@
-# AI_FILTER — Surfacing Actionable Customer Feedback
+# AI_FILTER — Customer Feedback Filtering
 
-**Data modality:** Semi-Structured (VARIANT/JSON)
-**Feature:** AI_FILTER
-**Dataset:** Synthetic customer feedback JSON (generated inline)
+| | |
+|---|---|
+| **Data modality** | Semi-Structured (VARIANT/JSON) |
+| **Feature** | `SNOWFLAKE.CORTEX.AI_FILTER` |
+| **Dataset** | 20 VARIANT JSON customer feedback records |
 
-## What this example teaches
+## What you will learn
 
-How to use `AI_FILTER` as a semantic `WHERE` clause to surface only actionable feedback items from a mixed dataset, then chain with `AI_CLASSIFY` for routing.
+Use natural-language conditions as a semantic WHERE clause — no regex or keyword lists.
 
-## Run instructions
+## How to run
 
-```bash
-snow sql -f ../../shared/utils.sql  # once
-snow sql -f setup.sql
-export SNOWFLAKE_CONNECTION_NAME=<your_connection>
-jupyter nbconvert --to notebook --execute notebook.ipynb --inplace
-```
+1. Open `notebook.ipynb` in **Snowsight** (via a workspace or direct notebook import)
+2. Select a warehouse when prompted
+3. **Run All** — the notebook creates all objects and data inline
+
+## Dependencies
+
+None

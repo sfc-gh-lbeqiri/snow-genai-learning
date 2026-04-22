@@ -1,22 +1,21 @@
 # AI_EXTRACT — JSON Log Entity Extraction
 
-**Data modality:** Semi-Structured (VARIANT/JSON)
-**Feature:** AI_EXTRACT
-**Dataset:** Synthetic JSON web server logs (generated inline, no download)
+| | |
+|---|---|
+| **Data modality** | Semi-Structured (VARIANT/JSON) |
+| **Feature** | `SNOWFLAKE.CORTEX.AI_EXTRACT` |
+| **Dataset** | 200 synthetic JSON web server logs (15 hand-crafted + 185 generated) |
 
-## What this example teaches
+## What you will learn
 
-How to use `AI_EXTRACT` to pull structured fields out of VARIANT/JSON columns, especially when field names are inconsistent or the data is partially unstructured (like error messages).
+Pull structured fields from VARIANT/JSON columns where data is messy or inconsistent.
 
-## Run instructions
+## How to run
 
-```bash
-snow sql -f ../../shared/utils.sql  # once
-snow sql -f setup.sql
-export SNOWFLAKE_CONNECTION_NAME=<your_connection>
-jupyter nbconvert --to notebook --execute notebook.ipynb --inplace
-```
+1. Open `notebook.ipynb` in **Snowsight** (via a workspace or direct notebook import)
+2. Select a warehouse when prompted
+3. **Run All** — the notebook creates all objects and data inline
 
-## Dataset
+## Dependencies
 
-200 synthetic JSON web server logs generated inline using `INSERT INTO` + `TABLE(GENERATOR(...))`. No external download required.
+None

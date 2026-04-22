@@ -1,18 +1,21 @@
-# AI_TRANSLATE — Multilingual Product Catalog Normalisation
+# AI_TRANSLATE — Multilingual Product Catalog
 
-**Data modality:** Semi-Structured
-**Feature:** AI_TRANSLATE
-**Dataset:** Synthetic multilingual product descriptions (generated inline)
+| | |
+|---|---|
+| **Data modality** | Semi-Structured |
+| **Feature** | `SNOWFLAKE.CORTEX.AI_TRANSLATE` |
+| **Dataset** | 16 product descriptions in 12 languages |
 
-## What this example teaches
+## What you will learn
 
-How to use `AI_TRANSLATE` to normalise a multilingual product catalog to English, with auto-detection of source language.
+Normalize multilingual content to English for unified analysis and quality checking.
 
-## Run instructions
+## How to run
 
-```bash
-snow sql -f ../../shared/utils.sql  # once
-snow sql -f setup.sql
-export SNOWFLAKE_CONNECTION_NAME=<your_connection>
-jupyter nbconvert --to notebook --execute notebook.ipynb --inplace
-```
+1. Open `notebook.ipynb` in **Snowsight** (via a workspace or direct notebook import)
+2. Select a warehouse when prompted
+3. **Run All** — the notebook creates all objects and data inline
+
+## Dependencies
+
+None

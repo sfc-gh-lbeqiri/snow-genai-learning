@@ -1,26 +1,21 @@
-# AI_PARSE_DOCUMENT — PDF Invoice Data Extraction
+# AI_PARSE_DOCUMENT — Invoice Processing
 
-**Data modality:** Unstructured (PDF documents)
-**Feature:** AI_PARSE_DOCUMENT
-**Dataset:** 3 synthetic PDF invoices generated with `generate_invoices.py`
+| | |
+|---|---|
+| **Data modality** | Unstructured (PDF documents) |
+| **Feature** | `SNOWFLAKE.CORTEX.AI_PARSE_DOCUMENT` |
+| **Dataset** | PDF invoices uploaded to `@invoice_pdfs` stage |
 
-## What this example teaches
+## What you will learn
 
-How to use `AI_PARSE_DOCUMENT` to extract structured data from PDF files stored on a Snowflake stage, combined with `AI_EXTRACT` for specific field extraction.
+Extract structured data from PDFs using OCR and LAYOUT modes, then chain with COMPLETE for field extraction.
 
-## Prerequisites
+## How to run
 
-```bash
-pip install fpdf2 snowflake-connector-python
-export SNOWFLAKE_CONNECTION_NAME=<your_connection>
-python generate_invoices.py   # generates PDFs and uploads to stage
-```
+1. Open `notebook.ipynb` in **Snowsight** (via a workspace or direct notebook import)
+2. Select a warehouse when prompted
+3. **Run All** — the notebook creates all objects and data inline
 
-## Run instructions
+## Dependencies
 
-```bash
-snow sql -f ../../shared/utils.sql  # once
-snow sql -f setup.sql
-python generate_invoices.py
-jupyter nbconvert --to notebook --execute notebook.ipynb --inplace
-```
+Upload PDF files to the `@invoice_pdfs` stage before running the parse cells. Use Snowsight upload or PUT.

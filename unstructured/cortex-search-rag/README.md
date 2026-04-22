@@ -1,29 +1,21 @@
-# AI_EMBED + Cortex Search — Semantic Search and RAG
+# Cortex Search + RAG — Semantic Search & Retrieval-Augmented Generation
 
-**Data modality:** Unstructured (text documents)
-**Feature:** AI_EMBED (EMBED_TEXT_1024), Cortex Search Service, CORTEX.COMPLETE (RAG)
-**Dataset:** Wiki articles from Phase 3a (reused — no new data)
+| | |
+|---|---|
+| **Data modality** | Unstructured (text documents) |
+| **Feature** | `EMBED_TEXT_1024`, `VECTOR_COSINE_SIMILARITY`, Cortex Search Service, `CORTEX.COMPLETE` |
+| **Dataset** | Wiki articles from the AI_SUMMARIZE lab |
 
-## What this example teaches
+## What you will learn
 
-Three progressive approaches: manual vector search with embeddings → managed Cortex Search Service → full RAG pipeline combining search with LLM generation.
+Three approaches: manual vector search → managed Cortex Search Service → full RAG pipeline.
 
-## Prerequisites
+## How to run
 
-Run Phase 3a first:
-```bash
-snow sql -f ../ai-summarize-articles/setup.sql
-```
+1. Open `notebook.ipynb` in **Snowsight** (via a workspace or direct notebook import)
+2. Select a warehouse when prompted
+3. **Run All** — the notebook creates all objects and data inline
 
-## Run instructions
+## Dependencies
 
-```bash
-snow sql -f ../../shared/utils.sql  # once
-snow sql -f setup.sql               # creates embeddings + Cortex Search Service
-export SNOWFLAKE_CONNECTION_NAME=<your_connection>
-jupyter nbconvert --to notebook --execute notebook.ipynb --inplace
-```
-
-## Note on Cortex Search Service
-
-The `CREATE CORTEX SEARCH SERVICE` in `setup.sql` references `COMPUTE_WH`. Update the warehouse name to match your account if needed.
+Run the **AI_SUMMARIZE** lab first to create the `wiki_articles` table.

@@ -1,22 +1,21 @@
 # AI_CLASSIFY — Order Comment Classification
 
-**Data modality:** Structured
-**Feature:** AI_CLASSIFY
-**Dataset:** TPC-H ORDERS from `SNOWFLAKE_SAMPLE_DATA` (zero ingestion)
+| | |
+|---|---|
+| **Data modality** | Structured |
+| **Feature** | `SNOWFLAKE.CORTEX.AI_CLASSIFY` |
+| **Dataset** | TPC-H ORDERS from `SNOWFLAKE_SAMPLE_DATA` (zero ingestion) |
 
-## What this example teaches
+## What you will learn
 
-How to use `AI_CLASSIFY` to automatically tag free-text columns into predefined business categories using an LLM — no regex, no model training.
+Classify free-text order comments into business categories using an LLM — no regex, no model training.
 
-## Run instructions
+## How to run
 
-```bash
-snow sql -f ../../shared/utils.sql  # once
-snow sql -f setup.sql
-export SNOWFLAKE_CONNECTION_NAME=<your_connection>
-jupyter nbconvert --to notebook --execute notebook.ipynb --inplace
-```
+1. Open `notebook.ipynb` in **Snowsight** (via a workspace or direct notebook import)
+2. Select a warehouse when prompted
+3. **Run All** — the notebook creates all objects and data inline
 
-## Dataset
+## Dependencies
 
-`SNOWFLAKE_SAMPLE_DATA.TPCH_SF1.ORDERS.O_COMMENT` — available in all Snowflake accounts.
+None

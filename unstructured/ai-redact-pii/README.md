@@ -1,18 +1,21 @@
-# AI_REDACT — PII Redaction from Unstructured Text
+# AI_REDACT — PII Detection & Redaction
 
-**Data modality:** Unstructured (free-text records)
-**Feature:** AI_REDACT
-**Dataset:** Synthetic PII-containing records (inserted inline, no download)
+| | |
+|---|---|
+| **Data modality** | Unstructured (free-text records) |
+| **Feature** | `SNOWFLAKE.CORTEX.AI_REDACT` |
+| **Dataset** | 10 synthetic records with various PII types (created inline) |
 
-## What this example teaches
+## What you will learn
 
-How to use `AI_REDACT` to automatically redact PII from free-text columns, with selective redaction by record type and a safe analytics view pattern.
+Automatically detect and mask PII — names, SSNs, emails, phones, addresses — for compliance.
 
-## Run instructions
+## How to run
 
-```bash
-snow sql -f ../../shared/utils.sql  # once
-snow sql -f setup.sql
-export SNOWFLAKE_CONNECTION_NAME=<your_connection>
-jupyter nbconvert --to notebook --execute notebook.ipynb --inplace
-```
+1. Open `notebook.ipynb` in **Snowsight** (via a workspace or direct notebook import)
+2. Select a warehouse when prompted
+3. **Run All** — the notebook creates all objects and data inline
+
+## Dependencies
+
+None

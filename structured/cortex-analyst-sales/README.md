@@ -1,36 +1,21 @@
-# Cortex Analyst — Sales Q&A
+# Cortex Analyst — Natural Language Sales Q&A
 
-**Data modality:** Structured
-**Feature:** Cortex Analyst (text-to-SQL with semantic model)
-**Dataset:** TPC-H SF1 from `SNOWFLAKE_SAMPLE_DATA` (zero ingestion)
-
-## What this example teaches
-
-How to build a natural language Q&A interface over structured sales data using Cortex Analyst and a semantic model YAML.
-
-## Run instructions
-
-```bash
-# 1. Create the database (once)
-snow sql -f ../../shared/utils.sql
-
-# 2. Create views and stage
-snow sql -f setup.sql
-
-# 3. Execute notebook
-export SNOWFLAKE_CONNECTION_NAME=<your_connection>
-jupyter nbconvert --to notebook --execute notebook.ipynb --inplace
-```
-
-## Files
-
-| File | Purpose |
+| | |
 |---|---|
-| `setup.sql` | Creates views over TPC-H and the `@semantic_models` stage |
-| `sales_semantic_model.yaml` | Semantic model definition (tables, measures, relationships, verified queries) |
-| `notebook.ipynb` | End-to-end walkthrough: upload model → ask questions → interpret results |
+| **Data modality** | Structured |
+| **Feature** | Cortex Analyst (text-to-SQL via semantic model) |
+| **Dataset** | TPC-H ORDERS, LINEITEM, CUSTOMER views + `sales_semantic_model.yaml` |
 
-## Dataset
+## What you will learn
 
-`SNOWFLAKE_SAMPLE_DATA.TPCH_SF1` — available in all Snowflake accounts. No download needed.
-Tables used: `ORDERS`, `LINEITEM`, `CUSTOMER`
+Convert natural-language questions into SQL using a YAML semantic model staged in Snowflake.
+
+## How to run
+
+1. Open `notebook.ipynb` in **Snowsight** (via a workspace or direct notebook import)
+2. Select a warehouse when prompted
+3. **Run All** — the notebook creates all objects and data inline
+
+## Dependencies
+
+None. The `sales_semantic_model.yaml` file is included in this directory.

@@ -1,18 +1,21 @@
-# AI_SUMMARIZE — Wikipedia Article Summarisation
+# AI_SUMMARIZE — Article Summarization
 
-**Data modality:** Unstructured (long-form text)
-**Feature:** AI_SUMMARIZE
-**Dataset:** 5 synthetic Wikipedia-style articles (inserted inline, no download)
+| | |
+|---|---|
+| **Data modality** | Unstructured (long-form text) |
+| **Feature** | `SNOWFLAKE.CORTEX.AI_SUMMARIZE` |
+| **Dataset** | 5 Wikipedia-style technology articles (created inline) |
 
-## What this example teaches
+## What you will learn
 
-How to use `AI_SUMMARIZE` to condense long-form text into concise summaries, including batch processing and comparison with targeted `CORTEX.COMPLETE` prompts.
+Auto-generate concise summaries and category digests from long-form text.
 
-## Run instructions
+## How to run
 
-```bash
-snow sql -f ../../shared/utils.sql  # once
-snow sql -f setup.sql
-export SNOWFLAKE_CONNECTION_NAME=<your_connection>
-jupyter nbconvert --to notebook --execute notebook.ipynb --inplace
-```
+1. Open `notebook.ipynb` in **Snowsight** (via a workspace or direct notebook import)
+2. Select a warehouse when prompted
+3. **Run All** — the notebook creates all objects and data inline
+
+## Dependencies
+
+None
