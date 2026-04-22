@@ -4,14 +4,14 @@ Convert text to vectors and measure similarity with all four distance metrics.
 
 ## What You'll Learn
 
-- EMBED_TEXT_768 vs EMBED_TEXT_1024
+- AI_EMBED with 768-dim vs 1024-dim models
 - All 4 vector distances (cosine, inner product, L1, L2)
 - Storing embeddings in VECTOR columns
 - Nearest-neighbor search
 
 ## Functions & Features
 
-`EMBED_TEXT_768`, `EMBED_TEXT_1024`, `VECTOR_COSINE_SIMILARITY`, `VECTOR_INNER_PRODUCT`, `VECTOR_L1_DISTANCE`, `VECTOR_L2_DISTANCE`
+`AI_EMBED`, `VECTOR_COSINE_SIMILARITY`, `VECTOR_INNER_PRODUCT`, `VECTOR_L1_DISTANCE`, `VECTOR_L2_DISTANCE`
 
 ## Exam Domain
 

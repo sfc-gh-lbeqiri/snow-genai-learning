@@ -1,4 +1,4 @@
-# Lab 01 — CORTEX.COMPLETE Basics
+# Lab 01 — AI_COMPLETE Basics
 
 The foundational function for calling LLMs inside Snowflake SQL.
 
@@ -6,13 +6,13 @@ The foundational function for calling LLMs inside Snowflake SQL.
 
 - Simple string prompts
 - System + user message patterns
-- COMPLETE options (temperature, max_tokens, top_p)
+- AI_COMPLETE options (temperature, max_tokens, top_p)
 - Five prompt engineering patterns
 - Multi-model comparison
 
 ## Functions & Features
 
-`SNOWFLAKE.CORTEX.COMPLETE`
+`AI_COMPLETE`
 
 ## Exam Domain
 

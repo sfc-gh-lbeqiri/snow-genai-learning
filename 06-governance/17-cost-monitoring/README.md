@@ -8,12 +8,12 @@ Track and optimize Cortex AI spending.
 
 - METERING_DAILY_HISTORY for credit tracking
 - CORTEX_FUNCTIONS_USAGE_HISTORY per-function
-- Pre-estimate costs with COUNT_TOKENS
+- Pre-estimate costs with AI_COUNT_TOKENS
 - Cost optimization strategies
 
 ## Functions & Features
 
-`ACCOUNT_USAGE views`, `COUNT_TOKENS`
+`ACCOUNT_USAGE views`, `AI_COUNT_TOKENS`
 
 ## Exam Domain
 

@@ -13,7 +13,7 @@ The full RAG pattern: embed → search → generate a grounded answer.
 
 ## Functions & Features
 
-`EMBED_TEXT_768`, `VECTOR_COSINE_SIMILARITY`, `COMPLETE`
+`AI_EMBED`, `VECTOR_COSINE_SIMILARITY`, `AI_COMPLETE`
 
 ## Exam Domain
 

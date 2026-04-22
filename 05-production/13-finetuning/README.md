@@ -7,7 +7,7 @@ Customize LLMs for your domain using training examples.
 - Training data format (prompt + completion)
 - FINETUNE CREATE/DESCRIBE/SHOW syntax
 - Base model selection
-- Using fine-tuned models in COMPLETE
+- Using fine-tuned models in AI_COMPLETE
 
 ## Functions & Features
 

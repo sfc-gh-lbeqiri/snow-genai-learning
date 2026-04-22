@@ -13,7 +13,7 @@ A managed semantic search service — indexing, embedding, and retrieval in one 
 
 ## Functions & Features
 
-`Cortex Search Service`, `EMBED_TEXT_1024`, `VECTOR_COSINE_SIMILARITY`
+`Cortex Search Service`, `AI_EMBED`, `VECTOR_COSINE_SIMILARITY`
 
 ## Exam Domain
 

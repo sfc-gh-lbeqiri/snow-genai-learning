@@ -1,4 +1,4 @@
-# Lab 02 — Advanced COMPLETE & Helper Functions
+# Lab 02 — Advanced AI_COMPLETE & Helper Functions
 
 Structured outputs, error handling, token management, and text chunking.
 
@@ -8,12 +8,12 @@ Structured outputs, error handling, token management, and text chunking.
 
 - JSON mode (response_format)
 - TRY_COMPLETE error-safe completion
-- COUNT_TOKENS for cost estimation
+- AI_COUNT_TOKENS for cost estimation
 - SPLIT_TEXT_RECURSIVE_CHARACTER for chunking
 
 ## Functions & Features
 
-`Structured Outputs`, `TRY_COMPLETE`, `COUNT_TOKENS`, `SPLIT_TEXT_RECURSIVE_CHARACTER`
+`AI_COMPLETE`, `AI_COUNT_TOKENS`, `TRY_COMPLETE`¹, `SPLIT_TEXT_RECURSIVE_CHARACTER`¹
 
 ## Exam Domain
 

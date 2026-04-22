@@ -1,4 +1,4 @@
-# Lab 06 — AI_SUMMARIZE & AI_TRANSLATE
+# Lab 06 — AI_SUMMARIZE_AGG & AI_TRANSLATE
 
 Summarize long text and translate between languages — natural partners for global content.
 
@@ -11,7 +11,7 @@ Summarize long text and translate between languages — natural partners for glo
 
 ## Functions & Features
 
-`AI_SUMMARIZE`, `AI_TRANSLATE`
+`AI_SUMMARIZE_AGG`, `AI_TRANSLATE`
 
 ## Exam Domain
 

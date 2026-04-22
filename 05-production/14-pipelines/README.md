@@ -11,7 +11,7 @@ Operationalize Cortex AI with Dynamic Tables, Streams, and Tasks.
 
 ## Functions & Features
 
-`Dynamic Tables`, `Streams`, `Tasks`, `AI_CLASSIFY`, `AI_SENTIMENT`, `AI_SUMMARIZE`
+`Dynamic Tables`, `Streams`, `Tasks`, `AI_CLASSIFY`, `AI_SENTIMENT`, `AI_SUMMARIZE_AGG`
 
 ## Exam Domain
 

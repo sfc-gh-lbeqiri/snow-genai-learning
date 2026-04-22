@@ -6,7 +6,7 @@ Mask PII automatically and extract text from documents.
 
 - Automatic PII detection and redaction
 - OCR vs LAYOUT document parsing modes
-- Chaining: parse → extract with COMPLETE
+- Chaining: parse → extract with AI_COMPLETE
 
 ## Functions & Features
 

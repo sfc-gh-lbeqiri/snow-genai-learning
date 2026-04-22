@@ -11,7 +11,7 @@ Screen LLM inputs/outputs for safety, prompt injection, and hallucination.
 
 ## Functions & Features
 
-`Cortex Guard`, `COMPLETE with guardrails`
+`Cortex Guard`, `AI_COMPLETE with guardrails`
 
 ## Exam Domain
 
