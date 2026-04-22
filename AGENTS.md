@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Practical learning resource for Snowflake Solutions Architects. Every lab is a **self-contained SQL Snowflake Notebook** (`.ipynb` with `language_info: sql`) that includes setup, sample data, and demos in a single file.
+Practical learning resource for Snowflake Solutions Architects aligned with the **SnowPro Specialty: Generative AI** exam. Every lab is a **self-contained SQL Snowflake Notebook** (`.ipynb` with Streamlit kernelspec) that includes setup, sample data, and demos in a single file.
 
 ---
 
@@ -18,19 +18,35 @@ Practical learning resource for Snowflake Solutions Architects. Every lab is a *
 snow-genai-learning/
 ├── AGENTS.md
 ├── README.md
-├── structured/
-│   └── <use-case-name>/
-│       └── notebook.ipynb    # Self-contained SQL notebook (setup + demo)
-├── semi-structured/
-│   └── <use-case-name>/
-│       └── notebook.ipynb
-└── unstructured/
-    └── <use-case-name>/
-        └── notebook.ipynb
+├── 01-foundations/
+│   ├── 01-complete-basics/notebook.ipynb
+│   ├── 02-complete-advanced/notebook.ipynb
+│   └── 03-embeddings-vectors/notebook.ipynb
+├── 02-ai-functions/
+│   ├── 04-classify-sentiment/notebook.ipynb
+│   ├── 05-extract-filter/notebook.ipynb
+│   ├── 06-summarize-translate/notebook.ipynb
+│   ├── 07-redact-parse/notebook.ipynb
+│   └── 08-agg-extract-answer/notebook.ipynb
+├── 03-search-and-rag/
+│   ├── 09-cortex-search/notebook.ipynb
+│   └── 10-rag-pattern/notebook.ipynb
+├── 04-analyst-and-agents/
+│   ├── 11-cortex-analyst/notebook.ipynb
+│   ├── 11-cortex-analyst/sales_semantic_model.yaml
+│   └── 12-cortex-agent/notebook.ipynb
+├── 05-production/
+│   ├── 13-finetuning/notebook.ipynb
+│   ├── 14-pipelines/notebook.ipynb
+│   └── 15-guard-safety/notebook.ipynb
+└── 06-governance/
+    ├── 16-access-controls/notebook.ipynb
+    ├── 17-cost-monitoring/notebook.ipynb
+    └── 18-observability/notebook.ipynb
 ```
 
 Each notebook contains:
-- Markdown cells with explanations and architecture diagrams
+- Markdown cells with explanations and reference tables
 - SQL cells that create the database, tables, insert data, and run demos
 - No external setup scripts, no Python dependencies
 
@@ -44,32 +60,58 @@ Each notebook contains:
 
 ---
 
-## GenAI Capabilities Covered (13 labs)
+## 18 Labs — Organized by Learning Journey
 
-| Feature | Data Modality | Dataset |
+### Part 1: Foundations (Labs 01–03)
+| Lab | Functions | Data |
 |---|---|---|
-| `AI_CLASSIFY` | Structured | TPC-H ORDERS |
-| `AI_SENTIMENT` | Structured | 30 synthetic reviews |
-| `AI_AGG` | Structured | TPC-H LINEITEM |
-| Cortex Analyst | Structured | TPC-H views + semantic model |
-| `AI_EXTRACT` | Semi-Structured | 200 JSON logs |
-| `AI_FILTER` | Semi-Structured | 20 VARIANT feedback records |
-| `AI_TRANSLATE` | Semi-Structured | 16 multilingual descriptions |
-| `CORTEX.COMPLETE` | Semi-Structured | Prompt patterns |
-| `AI_SUMMARIZE` | Unstructured | 5 Wikipedia-style articles |
-| `AI_PARSE_DOCUMENT` | Unstructured | PDF invoices on stage |
-| `AI_REDACT` | Unstructured | 10 synthetic PII records |
-| Cortex Search + RAG | Unstructured | Article embeddings |
-| Cortex Agent | Unstructured | Multi-tool orchestration |
+| 01 Complete Basics | `COMPLETE` | Prompt experiments |
+| 02 Complete Advanced | `TRY_COMPLETE`, `COUNT_TOKENS`, `SPLIT_TEXT` | Mixed |
+| 03 Embeddings & Vectors | `EMBED_TEXT_768/1024`, all 4 vector distances | Embedding store |
+
+### Part 2: AI Functions (Labs 04–08) — Paired complementary functions
+| Lab | Functions | Data |
+|---|---|---|
+| 04 Classify + Sentiment | `AI_CLASSIFY` + `AI_SENTIMENT` | TPC-H ORDERS + 9 reviews |
+| 05 Extract + Filter | `AI_EXTRACT` + `AI_FILTER` | 6 logs + 8 feedback records |
+| 06 Summarize + Translate | `AI_SUMMARIZE` + `AI_TRANSLATE` | 3 articles + 7 catalog entries |
+| 07 Redact + Parse | `AI_REDACT` + `AI_PARSE_DOCUMENT` | 5 PII records + staged PDFs |
+| 08 Agg + Extract Answer | `AI_AGG` + `EXTRACT_ANSWER` | TPC-H LINEITEM + 3 QA docs |
+
+### Part 3: Search & RAG (Labs 09–10)
+| Lab | Functions | Data |
+|---|---|---|
+| 09 Cortex Search | Cortex Search Service DDL | wiki_articles |
+| 10 RAG Pattern | Embed → Search → Complete | rag_knowledge_base |
+
+### Part 4: Analyst & Agents (Labs 11–12)
+| Lab | Functions | Data |
+|---|---|---|
+| 11 Cortex Analyst | Semantic Model YAML, VQR, Semantic Views | TPC-H views |
+| 12 Cortex Agent | REST API, multi-tool orchestration | Search + Analyst |
+
+### Part 5: Production (Labs 13–15)
+| Lab | Functions | Data |
+|---|---|---|
+| 13 Fine-Tuning | `FINETUNE('CREATE')` | 5 training examples |
+| 14 Pipelines | Dynamic Tables + Streams + Tasks | Support tickets |
+| 15 Guard & Safety | Cortex Guard (`guardrails: true`) | Prompt patterns |
+
+### Part 6: Governance (Labs 16–18)
+| Lab | Functions | Data |
+|---|---|---|
+| 16 Access Controls | `CORTEX_MODELS_ALLOWLIST`, cross-region | Account params |
+| 17 Cost Monitoring | `ACCOUNT_USAGE` views, `COUNT_TOKENS` | Usage history |
+| 18 Observability | Event Tables, LLM-as-Judge | Evaluation samples |
 
 ---
 
 ## Notebook Format
 
-All notebooks are Snowflake SQL notebooks:
-- File format: `.ipynb` with `"language_info": {"name": "sql"}`
-- Code cells contain SQL (executed by Snowflake)
-- Markdown cells contain explanations
+All notebooks use the Snowflake-native format:
+- Kernelspec: `"display_name": "Streamlit Notebook", "name": "streamlit"`
+- Code cells: `"metadata": {"language": "sql", "name": "cell_name"}`
+- Markdown cells: `"metadata": {"name": "cell_name", "collapsed": false}`
 
 ### Narrative structure
 1. **Use Case Overview** — what problem this solves, key metadata table
