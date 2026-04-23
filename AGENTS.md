@@ -18,28 +18,28 @@ Practical learning resource for Snowflake Solutions Architects aligned with the 
 snow-genai-learning/
 ├── AGENTS.md
 ├── README.md
-├── 01-foundations/
+├── b-foundations/
 │   ├── 01-complete-basics/notebook.ipynb
 │   ├── 02-complete-advanced/notebook.ipynb
 │   └── 03-embeddings-vectors/notebook.ipynb
-├── 02-ai-functions/
+├── c-ai-functions/
 │   ├── 04-classify-sentiment/notebook.ipynb
 │   ├── 05-extract-filter/notebook.ipynb
 │   ├── 06-summarize-translate/notebook.ipynb
 │   ├── 07-redact-parse/notebook.ipynb
 │   └── 08-agg-extract-answer/notebook.ipynb
-├── 03-search-and-rag/
+├── d-search-and-rag/
 │   ├── 09-cortex-search/notebook.ipynb
 │   └── 10-rag-pattern/notebook.ipynb
-├── 04-analyst-and-agents/
+├── e-analyst-and-agents/
 │   ├── 11-cortex-analyst/notebook.ipynb
 │   ├── 11-cortex-analyst/sales_semantic_model.yaml
 │   └── 12-cortex-agent/notebook.ipynb
-├── 05-production/
+├── f-production/
 │   ├── 13-finetuning/notebook.ipynb
 │   ├── 14-pipelines/notebook.ipynb
 │   └── 15-guard-safety/notebook.ipynb
-└── 06-governance/
+└── g-governance/
     ├── 16-access-controls/notebook.ipynb
     ├── 17-cost-monitoring/notebook.ipynb
     └── 18-observability/notebook.ipynb
