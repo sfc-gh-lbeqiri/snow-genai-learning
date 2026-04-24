@@ -18,6 +18,7 @@ Practical learning resource for Snowflake Solutions Architects aligned with the 
 snow-genai-learning/
 ├── AGENTS.md
 ├── README.md
+├── a-admin-setup/notebook.ipynb
 ├── b-foundations/
 │   ├── 01-complete-basics/notebook.ipynb
 │   ├── 02-complete-advanced/notebook.ipynb
@@ -62,14 +63,14 @@ Each notebook contains:
 
 ## 18 Labs — Organized by Learning Journey
 
-### Part 1: Foundations (Labs 01–03)
+### Part b: Foundations (Labs 01–03)
 | Lab | Functions | Data |
 |---|---|---|
 | 01 Complete Basics | `AI_COMPLETE` | Prompt experiments |
 | 02 Complete Advanced | `AI_COMPLETE`, `AI_COUNT_TOKENS`, `TRY_COMPLETE`¹, `SPLIT_TEXT`¹ | Mixed |
 | 03 Embeddings & Vectors | `AI_EMBED`, all 4 vector distances | Embedding store |
 
-### Part 2: AI Functions (Labs 04–08) — Paired complementary functions
+### Part c: AI Functions (Labs 04–08) — Paired complementary functions
 | Lab | Functions | Data |
 |---|---|---|
 | 04 Classify + Sentiment | `AI_CLASSIFY` + `AI_SENTIMENT` | TPC-H ORDERS + 9 reviews |
@@ -78,26 +79,26 @@ Each notebook contains:
 | 07 Redact + Parse | `AI_REDACT` + `AI_PARSE_DOCUMENT` | 5 PII records + staged PDFs |
 | 08 Agg + Extract Answer | `AI_AGG` + `EXTRACT_ANSWER`¹ | TPC-H LINEITEM + 3 QA docs |
 
-### Part 3: Search & RAG (Labs 09–10)
+### Part d: Search & RAG (Labs 09–10)
 | Lab | Functions | Data |
 |---|---|---|
 | 09 Cortex Search | Cortex Search Service DDL | wiki_articles |
 | 10 RAG Pattern | `AI_EMBED` → Search → `AI_COMPLETE` | rag_knowledge_base |
 
-### Part 4: Analyst & Agents (Labs 11–12)
+### Part e: Analyst & Agents (Labs 11–12)
 | Lab | Functions | Data |
 |---|---|---|
 | 11 Cortex Analyst | Semantic Model YAML, VQR, Semantic Views | TPC-H views |
 | 12 Cortex Agent | REST API, multi-tool orchestration | Search + Analyst |
 
-### Part 5: Production (Labs 13–15)
+### Part f: Production (Labs 13–15)
 | Lab | Functions | Data |
 |---|---|---|
 | 13 Fine-Tuning | `FINETUNE('CREATE')` | 5 training examples |
 | 14 Pipelines | Dynamic Tables + Streams + Tasks | Support tickets |
 | 15 Guard & Safety | Cortex Guard (`guardrails: true`) | Prompt patterns |
 
-### Part 6: Governance (Labs 16–18)
+### Part g: Governance (Labs 16–18)
 | Lab | Functions | Data |
 |---|---|---|
 | 16 Access Controls | `CORTEX_MODELS_ALLOWLIST`, cross-region | Account params |
@@ -141,7 +142,7 @@ All notebooks use the Snowflake-native format:
 
 ### Narrative structure
 1. **Use Case Overview** — what problem this solves, key metadata table
-2. **Environment Setup** — `CREATE DATABASE`, `CREATE TABLE`, `INSERT` data
+2. **Environment Setup** — `USE DATABASE GENAI_LEARNING`, `CREATE TABLE`, `INSERT` data (database pre-created by admin notebook)
 3. **Data Exploration** — preview the data
 4. **Feature Demo** — progressive examples (simple → complex)
 5. **Key Takeaways** — summary and SA tips
