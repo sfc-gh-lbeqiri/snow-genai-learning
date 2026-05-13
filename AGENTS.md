@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Practical learning resource for Snowflake Solutions Architects aligned with the **SnowPro Specialty: Generative AI** exam. Every lab is a **self-contained SQL Snowflake Notebook** (`.ipynb` with Streamlit kernelspec) that includes setup, sample data, and demos in a single file.
+Practical learning resource for Snowflake Solutions Architects aligned with the **SnowPro Specialty: Generative AI** exam. Every lab is a **self-contained Snowflake Notebook** (`.ipynb` with Streamlit kernelspec) that includes setup, sample data, and demos in a single file. Python cells auto-generate staged files (images, PDFs) where needed.
 
 ---
 
@@ -48,8 +48,9 @@ snow-genai-learning/
 
 Each notebook contains:
 - Markdown cells with explanations and reference tables
-- SQL cells that create the database, tables, insert data, and run demos
-- No external setup scripts, no Python dependencies
+- SQL cells that create tables, insert data, and run demos
+- Python cells that auto-generate staged files (images, PDFs) where needed
+- No external setup scripts or downloads required
 
 ---
 
@@ -66,17 +67,17 @@ Each notebook contains:
 ### Part b: Foundations (Labs 01–03)
 | Lab | Functions | Data |
 |---|---|---|
-| 01 Complete Basics | `AI_COMPLETE` | Prompt experiments |
+| 01 Complete Basics | `AI_COMPLETE` (text, image, prompt object) | Prompt experiments + staged images |
 | 02 Complete Advanced | `AI_COMPLETE`, `AI_COUNT_TOKENS`, `TRY_COMPLETE`¹, `SPLIT_TEXT`¹ | Mixed |
 | 03 Embeddings & Vectors | `AI_EMBED`, all 4 vector distances | Embedding store |
 
 ### Part c: AI Functions (Labs 04–08) — Paired complementary functions
 | Lab | Functions | Data |
 |---|---|---|
-| 04 Classify + Sentiment | `AI_CLASSIFY` + `AI_SENTIMENT` | TPC-H ORDERS + 9 reviews |
+| 04 Classify + Sentiment | `AI_CLASSIFY` + `AI_SENTIMENT` | Inline complaints + 9 reviews |
 | 05 Extract + Filter | `AI_EXTRACT` + `AI_FILTER` | 6 logs + 8 feedback records |
 | 06 Summarize + Translate | `AI_SUMMARIZE_AGG` + `AI_TRANSLATE` | 3 articles + 7 catalog entries |
-| 07 Redact + Parse | `AI_REDACT` + `AI_PARSE_DOCUMENT` | 5 PII records + staged PDFs |
+| 07 Redact + Parse | `AI_REDACT` + `AI_PARSE_DOCUMENT` | 5 PII records + auto-generated PDFs |
 | 08 Agg + Extract Answer | `AI_AGG` + `EXTRACT_ANSWER`¹ | TPC-H LINEITEM + 3 QA docs |
 
 ### Part d: Search & RAG (Labs 09–10)
@@ -138,6 +139,7 @@ Functions with **no `AI_` equivalent yet**: `TRY_COMPLETE`, `EXTRACT_ANSWER`, `S
 All notebooks use the Snowflake-native format:
 - Kernelspec: `"display_name": "Streamlit Notebook", "name": "streamlit"`
 - Code cells: `"metadata": {"language": "sql", "name": "cell_name"}`
+- Python cells: `"metadata": {"language": "python", "name": "cell_name"}`
 - Markdown cells: `"metadata": {"name": "cell_name", "collapsed": false}`
 
 ### Narrative structure
@@ -195,6 +197,10 @@ Run this as `ACCOUNTADMIN`. The refresh populates `SNOWFLAKE.MODELS` with all cu
 - Cortex Search service → `search-optimization` skill
 - Cortex Agent → `cortex-agent` skill
 - AI_CLASSIFY, AI_EXTRACT, AI_SUMMARIZE_AGG, etc. → `cortex-ai-functions` skill
+
+### Stages
+
+Labs that need staged files use `CREATE OR REPLACE STAGE` with `DIRECTORY = (ENABLE = TRUE)` and `ENCRYPTION = (TYPE = 'SNOWFLAKE_SSE')`. Both settings are required for `TO_FILE()` and `DIRECTORY()` to work.
 
 ### Quality bar
 - Every notebook must run top-to-bottom without errors in a Snowflake Workspace
