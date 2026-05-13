@@ -44,6 +44,10 @@ snow-genai-learning/
     ├── 16-access-controls/notebook.ipynb
     ├── 17-cost-monitoring/notebook.ipynb
     └── 18-observability/notebook.ipynb
+├── h-exam-prep/
+│   ├── 19-domain1-genai-overview/notebook.ipynb
+│   ├── 20-domain2-llm-functions/notebook.ipynb
+│   └── 21-domain3-governance/notebook.ipynb
 ```
 
 Each notebook contains:
@@ -62,7 +66,7 @@ Each notebook contains:
 
 ---
 
-## 18 Labs — Organized by Learning Journey
+## 21 Labs — Organized by Learning Journey
 
 ### Part b: Foundations (Labs 01–03)
 | Lab | Functions | Data |
@@ -107,6 +111,13 @@ Each notebook contains:
 | 18 Observability | Event Tables, LLM-as-Judge | Evaluation samples |
 
 ¹ No `AI_` prefixed equivalent yet — remains under `SNOWFLAKE.CORTEX` namespace.
+
+### Part h: Exam Prep (Labs 19–21)
+| Lab | Content | Questions |
+|---|---|---|
+| 19 Domain 1 — GenAI Overview | Flashcards + MCQ | 20 flashcards + 25 Qs |
+| 20 Domain 2 — LLM Functions | Flashcards + MCQ | 28 flashcards + 35 Qs |
+| 21 Domain 3 — Governance | Flashcards + MCQ | 18 flashcards + 25 Qs |
 
 ---
 

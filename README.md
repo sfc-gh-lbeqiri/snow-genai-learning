@@ -1,6 +1,6 @@
 # Snowflake GenAI Learning
 
-18 hands-on SQL labs for Solutions Architects — covering Cortex AI end-to-end. Organized as a **numbered learning journey** aligned with the **SnowPro Specialty: Generative AI** exam guide.
+21 hands-on labs for Solutions Architects — covering Cortex AI end-to-end. Organized as a **numbered learning journey** aligned with the **SnowPro Specialty: Generative AI** exam guide.
 
 Every lab is a **Snowflake-native Notebook** that runs directly in **Snowsight**. Each notebook is self-contained: environment setup, sample data creation, and feature demos are all inline — including Python cells that auto-generate staged files (images, PDFs) where needed. No external scripts or local tooling.
 
@@ -104,6 +104,16 @@ Paired complementary functions — learn two related tools per lab.
 | 18 | [`18-observability`](g-governance/18-observability/notebook.ipynb) | Event Tables, LLM-as-Judge | Query history, telemetry, automated quality evaluation |
 
 ¹ No `AI_` prefixed equivalent yet — remains under `SNOWFLAKE.CORTEX` namespace.
+
+### Part h: Exam Prep (Labs 19–21)
+
+Flashcards and practice questions — no Snowflake dependencies required, pure markdown notebooks.
+
+| # | Lab | Domain | Content |
+|---|---|---|---|
+| 19 | [`19-domain1-genai-overview`](h-exam-prep/19-domain1-genai-overview/notebook.ipynb) | 1.0 Gen AI Overview (30%) | 20 flashcards + 25 questions: tokens, embeddings, RAG, prompt engineering, fine-tuning, architecture |
+| 20 | [`20-domain2-llm-functions`](h-exam-prep/20-domain2-llm-functions/notebook.ipynb) | 2.0 Gen AI & LLM Functions (44%) | 28 flashcards + 35 questions: all AI_ functions, Cortex Search, Analyst, Agent |
+| 21 | [`21-domain3-governance`](h-exam-prep/21-domain3-governance/notebook.ipynb) | 3.0 Gen AI Governance (26%) | 18 flashcards + 25 questions: access controls, cost, safety, PII, observability |
 
 ---
 
